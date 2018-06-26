@@ -7,6 +7,6 @@ import ru.geekbrains.stargame.StarGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new StarGame(), config);
+		new LwjglApplication(new Start2Dgame(), config);
 	}
 }

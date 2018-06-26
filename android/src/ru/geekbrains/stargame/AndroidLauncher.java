@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import ru.geekbrains.stargame.StarGame;
+import ru.geekbrains.stargame.game.Start2Dgame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
