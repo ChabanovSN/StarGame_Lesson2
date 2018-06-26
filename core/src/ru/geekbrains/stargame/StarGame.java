@@ -5,38 +5,39 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class StarGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	Texture imgbk;
+
 	int ANDROID_WIDTH;
 	int ANDROID_HEIGHT;
-	private static float red = 0f;
-	private static float green = 0.5f;
-	private static float blue = 0.8f;
-	private static float step = 0.025f;
-	private static int deltaWidth = 10;
-	private static int deltaHeight = 10;
 
+	private static float deltaWidth = 3f;
+	private static float deltaHeight = 2.5f;
+   Vector2 pos;
+   Vector2 v;
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		img = new Texture("test/logo.png");
-		imgbk = new Texture("test/bk.png");
+		ANDROID_WIDTH = Gdx.graphics.getWidth();
+		ANDROID_HEIGHT = Gdx.graphics.getHeight();
+		pos = new Vector2(0,0);
+		//v = new Vector2(deltaWidth,deltaHeight);
 	}
 
 	@Override
 	public void render() {
-		ANDROID_WIDTH = Gdx.graphics.getWidth();
-		ANDROID_HEIGHT = Gdx.graphics.getHeight();
+
 		changeColorBackgroundAndPosition();
-		Gdx.gl.glClearColor(red, green, blue, 1);
+		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(imgbk, 15, 15, ANDROID_WIDTH - 30, ANDROID_HEIGHT - 30);
-		batch.draw(img, deltaWidth, deltaHeight);
+		batch.draw(img, pos.x, pos.y);
 		batch.end();
+		pos.add(deltaWidth,deltaHeight);
 	}
 
 	@Override
@@ -46,16 +47,11 @@ public class StarGame extends ApplicationAdapter {
 	}
 
 	private void changeColorBackgroundAndPosition() {
-		if (red <= 1f) red += step;
-		else red = 0.0f;
-		if (green <= 1f) green += step;
-		else green = 0.0f;
-		if (blue <= 1f) blue += step;
-		else blue = 0.0f;
-		if (deltaWidth >= ANDROID_WIDTH - 200)deltaWidth = 10;
-		else deltaWidth += 1;
-		if (deltaHeight >= ANDROID_HEIGHT - 200)deltaHeight = 10;
-		else deltaHeight += 1;
+
+		if (pos.x > ANDROID_WIDTH - img.getWidth())deltaWidth = -3f;
+		 if (pos.x <  0)deltaWidth =3f;
+		if (pos.y > ANDROID_HEIGHT - img.getHeight())deltaHeight =-2.5f ;
+		 if(pos.y <  0) deltaHeight =2.5f;
 
 	}
 }
