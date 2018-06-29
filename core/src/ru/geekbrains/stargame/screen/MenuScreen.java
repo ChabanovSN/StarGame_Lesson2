@@ -5,18 +5,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+
 import ru.geekbrains.stargame.base.Base2DScreen;
+
+/**
+ * Экран меню
+ */
 
 public class MenuScreen extends Base2DScreen {
 
-
-    private SpriteBatch batch;
-    private Texture img;
-
-    private static int x = 50;
-    private static int y = 100;
-    int ANDROID_WIDTH;
-    int ANDROID_HEIGHT;
+    Texture img;
 
     public MenuScreen(Game game) {
         super(game);
@@ -25,34 +24,32 @@ public class MenuScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
-        batch = new SpriteBatch();
-        img = new Texture("test/beetle.jpg");
-        ANDROID_WIDTH = Gdx.graphics.getWidth();
-        ANDROID_HEIGHT = Gdx.graphics.getHeight();
+        img = new Texture("badlogic.jpg");
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(img, x, y, 60, 60);
+        batch.draw(img, -0.5f, -0.5f, 1f, 1f);
         batch.end();
-        //  game.setScreen(new GameScreen());
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        x = ANDROID_WIDTH - (ANDROID_WIDTH - screenX + 30);
-        y = ANDROID_HEIGHT - screenY - 30;
-        return false;
-
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
+        img.dispose();
         super.dispose();
+    }
+
+    @Override
+    public void touchDown(Vector2 touch, int pointer) {
+        super.touchDown(touch, pointer);
+    }
+
+    @Override
+    public void touchUp(Vector2 touch, int pointer) {
+        super.touchUp(touch, pointer);
     }
 }
